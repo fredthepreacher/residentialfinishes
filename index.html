@@ -1107,6 +1107,28 @@
   }
 }
 
+
+/* FINAL ZOOM-OUT FIX FOR PROJECT 5 BEFORE/AFTER */
+.premium-ba-grid .ba-card:nth-last-child(-n+2) .ba-slider {
+  background: #efe7db;
+}
+
+.premium-ba-grid .ba-card:nth-last-child(-n+2) .ba-img {
+  object-fit: contain !important;
+  background: #efe7db;
+  padding: 10px;
+}
+
+.premium-ba-grid .ba-card:nth-last-child(-n+2) .ba-before-wrap {
+  background: #efe7db;
+}
+
+@media (max-width: 640px) {
+  .premium-ba-grid .ba-card:nth-last-child(-n+2) .ba-img {
+    padding: 6px;
+  }
+}
+
 </style>
 <!-- NETLIFY FORMS NOTE:
 After deployment, go to Netlify > Site configuration > Forms > Form notifications.
@@ -1327,8 +1349,8 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
 
       <article class="ba-card">
         <div class="ba-slider" data-slider>
-          <img class="ba-img ba-after" src="assets/project-5-after-composite-clean.jpg" alt="After - NYC Apartment Wall and Window Repair" loading="lazy">
-          <div class="ba-before-wrap"><img class="ba-img ba-before" src="assets/project-5-before-wall-new.jpg" alt="Before - NYC Apartment Wall and Mirror Gallery" loading="lazy"></div>
+          <img class="ba-img ba-after" src="assets/project-5-after-zoomed.jpg" alt="After - NYC Apartment Wall and Window Repair" loading="lazy">
+          <div class="ba-before-wrap"><img class="ba-img ba-before" src="assets/project-5-before-wall-zoomed.jpg" alt="Before - NYC Apartment Wall and Mirror Gallery" loading="lazy"></div>
           <div class="ba-label ba-label-before">Before</div>
           <div class="ba-label ba-label-after">After</div>
           <div class="ba-line"></div>
@@ -1342,8 +1364,8 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
 
       <article class="ba-card">
         <div class="ba-slider" data-slider>
-          <img class="ba-img ba-after" src="assets/project-5-after-composite-clean.jpg" alt="After - Window Sill Repair and Paint" loading="lazy">
-          <div class="ba-before-wrap"><img class="ba-img ba-before" src="assets/project-5-before-window-new.jpg" alt="Before - Window Sill Repair and Paint" loading="lazy"></div>
+          <img class="ba-img ba-after" src="assets/project-5-after-zoomed.jpg" alt="After - Window Sill Repair and Paint" loading="lazy">
+          <div class="ba-before-wrap"><img class="ba-img ba-before" src="assets/project-5-before-window-zoomed.jpg" alt="Before - Window Sill Repair and Paint" loading="lazy"></div>
           <div class="ba-label ba-label-before">Before</div>
           <div class="ba-label ba-label-after">After</div>
           <div class="ba-line"></div>
