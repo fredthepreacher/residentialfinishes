@@ -974,7 +974,37 @@
   color: rgba(28,28,30,0.68);
 }
 
-@media (max-width: 980px) {
+/* Static showcase cards (no slider) */
+.ba-card-static .ba-static-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+}
+.ba-card-static .ba-static-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.ba-card-static:hover .ba-static-img-wrap img {
+  transform: scale(1.04);
+}
+
+/* Hero overlay image */
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
+}
+
   .featured-transformation {
     grid-template-columns: 1fr;
   }
@@ -1026,6 +1056,7 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
 
 <!-- HERO -->
 <section class="hero">
+  <img src="assets/hero-bg-overlay.png" alt="" class="hero-bg-overlay" aria-hidden="true">
   <div class="hero-left">
     <!-- Single centered logo above eyebrow -->
     <div class="hero-logo-wrap">
@@ -1124,7 +1155,7 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
 <section id="before-after" class="modern-before-after premium-ba-section">
   <div class="modern-section-head premium-ba-head">
     <div class="section-label">Quality Work. Beautiful Results.</div>
-    <h2 class="section-title"><img src="assets/rf-logo.png" alt="Residential Finishes" class="section-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span style="display:none"><span>Residential</span> Finishes</span></h2>
+    <h2 class="section-title"><span>Residential</span> Finishes</h2>
     <p>Painting and drywall transformations with clean prep, professional repair, and smooth finished results.</p>
   </div>
 
@@ -1211,33 +1242,43 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
         </div>
       </article>
 
-<article class="ba-card">
-        <div class="ba-slider" data-slider>
-          <img class="ba-img ba-after" src="assets/project-5-after-wall.jpg" alt="After - NYC Apartment Wall & Mirror Gallery" loading="lazy">
-          <div class="ba-before-wrap"><img class="ba-img ba-before" src="assets/project-5-before-wall.jpg" alt="Before - NYC Apartment Wall & Mirror Gallery" loading="lazy"></div>
-          <div class="ba-label ba-label-before">Before</div>
-          <div class="ba-label ba-label-after">After</div>
-          <div class="ba-line"></div>
-          <button class="ba-handle" type="button" aria-label="Drag to compare before and after">↔</button>
+<article class="ba-card ba-card-static">
+        <div class="ba-static-img-wrap">
+          <img src="assets/showcase-1-bedroom-wood.png" alt="Freshly painted bedroom with warm wooden floors and clean bright walls" loading="lazy">
         </div>
         <div class="ba-card-copy">
-          <h3>NYC Apartment Wall Refresh</h3>
-          <p>Scuffs, stains and marks cleaned up with a fresh coat — walls look brand new.</p>
+          <h3>Bedroom Repaint – Bright &amp; Warm</h3>
+          <p>Crisp white walls and fresh trim give this bedroom a clean, welcoming feel from floor to ceiling.</p>
         </div>
       </article>
 
-<article class="ba-card">
-        <div class="ba-slider" data-slider>
-          <img class="ba-img ba-after" src="assets/project-5-after-window.jpg" alt="After - Window Sill Repair & Paint" loading="lazy">
-          <div class="ba-before-wrap"><img class="ba-img ba-before" src="assets/project-5-before.jpg" alt="Before - Window Sill Repair & Paint" loading="lazy"></div>
-          <div class="ba-label ba-label-before">Before</div>
-          <div class="ba-label ba-label-after">After</div>
-          <div class="ba-line"></div>
-          <button class="ba-handle" type="button" aria-label="Drag to compare before and after">↔</button>
+<article class="ba-card ba-card-static">
+        <div class="ba-static-img-wrap">
+          <img src="assets/showcase-2-bedroom-mirror.png" alt="Newly painted bedroom with smooth white walls and full-length mirror" loading="lazy">
         </div>
         <div class="ba-card-copy">
-          <h3>Window Sill Repair & Paint</h3>
-          <p>Chipped paint and surface damage repaired and refinished to a clean white finish.</p>
+          <h3>Flawless White Interior Finish</h3>
+          <p>Smooth, blemish-free walls achieved through careful prep, skim coat, and a professional final coat.</p>
+        </div>
+      </article>
+
+<article class="ba-card ba-card-static">
+        <div class="ba-static-img-wrap">
+          <img src="assets/showcase-3-room-lamp.png" alt="Room with freshly painted white walls, floor lamp and wood flooring" loading="lazy">
+        </div>
+        <div class="ba-card-copy">
+          <h3>Clean Wall &amp; Trim Refresh</h3>
+          <p>Sharp lines between walls and trim give every room a polished, professionally finished appearance.</p>
+        </div>
+      </article>
+
+<article class="ba-card ba-card-static">
+        <div class="ba-static-img-wrap">
+          <img src="assets/showcase-4-bedroom-green.png" alt="Bedroom with a painted green accent wall, warm copper lamps, and grey headboard" loading="lazy">
+        </div>
+        <div class="ba-card-copy">
+          <h3>Accent Wall – Bold Color Statement</h3>
+          <p>A rich sage green accent wall paired with clean surrounding walls transforms a bedroom into a relaxing retreat.</p>
         </div>
       </article>
   </div>
