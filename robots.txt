@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Block admin or form-processing endpoints (none currently, but future-proofing)
+Disallow: /cgi-bin/
+
+# Sitemap location
+Sitemap: https://www.residentialfinishes.com/sitemap.xml
