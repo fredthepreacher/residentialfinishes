@@ -1823,18 +1823,16 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
     <div class="section-label">Get Your Free Estimate</div>
     <h2 class="section-title">Request a Free Quote</h2>
     <p class="form-intro">Tell us about your project and we'll get back to you. Your information goes directly to the Residential Finishes team.</p>
-    <form class="rf-form" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
+    <form class="rf-form" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you-quote.html">
       <input type="hidden" name="form-name" value="quote-request">
-      <p class="hidden-field" aria-hidden="true">
-        <label>Do not fill this out if you are human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
-      </p>
+      <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="form-row">
         <input type="text" name="full-name" placeholder="Full Name" required>
         <input type="tel" name="phone" placeholder="Phone Number" required>
       </div>
       <div class="form-row">
         <input type="email" name="email" placeholder="Email Address" required>
-        <select name="service" required>
+        <select name="service">
           <option value="" disabled selected>What service do you need?</option>
           <option>Interior Painting</option>
           <option>Drywall Repair</option>
@@ -1844,9 +1842,9 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
           <option>Other</option>
         </select>
       </div>
-      <textarea name="message" placeholder="Tell us about your project" required></textarea>
+      <textarea name="message" placeholder="Tell us about your project"></textarea>
       <button type="submit" class="form-submit">Send Request</button>
-      <small>🔒 Your request will be captured securely and routed to residential.finishez@gmail.com.</small>
+      <small>🔒 Your request will be captured securely and routed to the Residential Finishes team.</small>
     </form>
   </div>
   <!-- Hiring Form -->
@@ -1860,18 +1858,16 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
       <li>Professional team environment</li>
       <li>Growth opportunities</li>
     </ul>
-    <form class="rf-form" name="painter-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html" enctype="multipart/form-data">
+    <form class="rf-form" name="painter-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you-employment.html" enctype="multipart/form-data">
       <input type="hidden" name="form-name" value="painter-application">
-      <p class="hidden-field" aria-hidden="true">
-        <label>Do not fill this out if you are human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
-      </p>
+      <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
       <div class="form-row">
         <input type="text" name="full-name" placeholder="Full Name" required>
         <input type="tel" name="phone" placeholder="Phone Number" required>
       </div>
       <div class="form-row">
         <input type="email" name="email" placeholder="Email Address" required>
-        <select name="experience" required>
+        <select name="experience">
           <option value="" disabled selected>Years of Experience</option>
           <option>Less than 1 year</option>
           <option>1–3 years</option>
@@ -1880,8 +1876,9 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
           <option>10+ years</option>
         </select>
       </div>
-      <textarea name="message" placeholder="Tell us about your painting or finishing experience" required></textarea>
-      <input type="file" name="resume" accept=".pdf,.doc,.docx,.jpg,.png" aria-label="Upload resume or work photos" style="font-size:0.88rem; color:var(--slate);">
+      <textarea name="message" placeholder="Tell us about your painting or finishing experience"></textarea>
+      <label class="resume-label" style="font-size:0.82rem;color:var(--slate);font-weight:600;letter-spacing:.5px;text-transform:uppercase;">Resume / Portfolio (optional)</label>
+      <input type="file" name="resume" accept=".pdf,.doc,.docx,.jpg,.png" style="font-size:0.88rem; color:var(--slate); border:1px solid rgba(74,85,104,0.18); padding:10px 12px; border-radius:4px; background:white; width:100%;">
       <button type="submit" class="form-submit">Apply Now</button>
     </form>
   </div>
@@ -1977,22 +1974,4 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
 
     slider.addEventListener('pointerdown', (event) => {
       slider.setPointerCapture(event.pointerId);
-      positionFromEvent(event.clientX);
-    });
-
-    slider.addEventListener('pointermove', (event) => {
-      if (event.buttons) positionFromEvent(event.clientX);
-    });
-
-    handle.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowLeft') { event.preventDefault(); setPosition(currentPct - 5); }
-      if (event.key === 'ArrowRight') { event.preventDefault(); setPosition(currentPct + 5); }
-    });
-
-    // Initialize
-    setPosition(50);
-  });
-</script>
-
-</body>
-</html>
+  
