@@ -924,13 +924,13 @@
 .ba-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; max-width: 1180px; margin: 0 auto; }
 .ba-card { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 22px 60px rgba(26,35,50,0.12); border: 1px solid rgba(201,168,76,0.18); }
 .ba-card:first-child { grid-column: 1 / -1; }
-.ba-slider { position: relative; height: clamp(360px, 52vw, 680px); overflow: hidden; cursor: ew-resize; background: var(--deep-navy); touch-action: none; user-select: none; }
+.ba-slider { position: relative; height: clamp(360px, 52vw, 680px); overflow: hidden; cursor: ew-resize; background: var(--deep-navy); touch-action: none; user-select: none; -webkit-user-select: none; }
 .ba-card:not(:first-child) .ba-slider { height: clamp(300px, 38vw, 480px); }
-.ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; }
+.ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
 .ba-before-wrap { position: absolute; inset: 0; clip-path: inset(0 50% 0 0); z-index: 2; }
 .ba-before-wrap .ba-img { width: 100%; height: 100%; }
 .ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: rgba(255,255,255,0.92); z-index: 4; transform: translateX(-50%); box-shadow: 0 0 18px rgba(0,0,0,0.35); pointer-events: none; }
-.ba-handle { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 5; width: 54px; height: 54px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.9); background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); color: white; font-size: 1.4rem; cursor: ew-resize; box-shadow: 0 10px 30px rgba(0,0,0,0.28); }
+.ba-handle { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 20; touch-action: none; pointer-events: auto; width: 54px; height: 54px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.9); background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); color: white; font-size: 1.4rem; cursor: ew-resize; box-shadow: 0 10px 30px rgba(0,0,0,0.28); }
 .ba-label { position: absolute; bottom: 18px; z-index: 6; padding: 8px 14px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; pointer-events: none; }
 .ba-label-before { left: 18px; background: rgba(28,28,30,0.82); color: var(--cream); }
 .ba-label-after { right: 18px; background: rgba(201,168,76,0.95); color: var(--charcoal); }
@@ -1439,6 +1439,8 @@
   display: block;
   pointer-events: none;
   -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 /* After image for this card – cover fills, center-crop portrait */
 .ba-card-repair .ba-img.ba-after {
@@ -1610,7 +1612,7 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
           <div class="ba-label ba-label-before">Before</div>
           <div class="ba-label ba-label-after">After</div>
           <div class="ba-line"></div>
-          <button class="ba-handle" type="button" aria-label="Drag to compare before and after">↔</button>
+          <button class="ba-handle" type="button" role="slider" tabindex="0" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" aria-label="Drag to compare before and after">↔</button>
         </div>
         <div class="ba-card-copy">
           <h3>Hallway Paint Refresh</h3>
@@ -1625,7 +1627,7 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
           <div class="ba-label ba-label-before">Before</div>
           <div class="ba-label ba-label-after">After</div>
           <div class="ba-line"></div>
-          <button class="ba-handle" type="button" aria-label="Drag to compare before and after">↔</button>
+          <button class="ba-handle" type="button" role="slider" tabindex="0" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" aria-label="Drag to compare before and after">↔</button>
         </div>
         <div class="ba-card-copy">
           <h3>Living Room Wall & Ceiling Repair</h3>
@@ -1640,7 +1642,7 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
           <div class="ba-label ba-label-before">Before</div>
           <div class="ba-label ba-label-after">After</div>
           <div class="ba-line"></div>
-          <button class="ba-handle" type="button" aria-label="Drag to compare before and after">↔</button>
+          <button class="ba-handle" type="button" role="slider" tabindex="0" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" aria-label="Drag to compare before and after">↔</button>
         </div>
         <div class="ba-card-copy">
           <h3>Window Wall Repair</h3>
@@ -1655,7 +1657,7 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
           <div class="ba-label ba-label-before">Before</div>
           <div class="ba-label ba-label-after">After</div>
           <div class="ba-line"></div>
-          <button class="ba-handle" type="button" aria-label="Drag to compare before and after">↔</button>
+          <button class="ba-handle" type="button" role="slider" tabindex="0" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" aria-label="Drag to compare before and after">↔</button>
         </div>
         <div class="ba-card-copy">
           <h3>Bedroom Transformation</h3>
@@ -1673,7 +1675,7 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
           <div class="ba-label ba-label-before">Before</div>
           <div class="ba-label ba-label-after">After</div>
           <div class="ba-line"></div>
-          <button class="ba-handle" type="button" aria-label="Drag to compare before and after">↔</button>
+          <button class="ba-handle" type="button" role="slider" tabindex="0" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" aria-label="Drag to compare before and after">↔</button>
         </div>
         <div class="ba-card-copy">
           <h3>Window Sill &amp; Wall Repair</h3>
@@ -1823,16 +1825,18 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
     <div class="section-label">Get Your Free Estimate</div>
     <h2 class="section-title">Request a Free Quote</h2>
     <p class="form-intro">Tell us about your project and we'll get back to you. Your information goes directly to the Residential Finishes team.</p>
-    <form class="rf-form" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you-quote.html">
+    <form class="rf-form" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
       <input type="hidden" name="form-name" value="quote-request">
-      <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
+      <p class="hidden-field" aria-hidden="true">
+        <label>Do not fill this out if you are human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+      </p>
       <div class="form-row">
         <input type="text" name="full-name" placeholder="Full Name" required>
         <input type="tel" name="phone" placeholder="Phone Number" required>
       </div>
       <div class="form-row">
         <input type="email" name="email" placeholder="Email Address" required>
-        <select name="service">
+        <select name="service" required>
           <option value="" disabled selected>What service do you need?</option>
           <option>Interior Painting</option>
           <option>Drywall Repair</option>
@@ -1842,9 +1846,9 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
           <option>Other</option>
         </select>
       </div>
-      <textarea name="message" placeholder="Tell us about your project"></textarea>
+      <textarea name="message" placeholder="Tell us about your project" required></textarea>
       <button type="submit" class="form-submit">Send Request</button>
-      <small>🔒 Your request will be captured securely and routed to the Residential Finishes team.</small>
+      <small>🔒 Your request will be captured securely and routed to residential.finishez@gmail.com.</small>
     </form>
   </div>
   <!-- Hiring Form -->
@@ -1858,16 +1862,18 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
       <li>Professional team environment</li>
       <li>Growth opportunities</li>
     </ul>
-    <form class="rf-form" name="painter-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you-employment.html" enctype="multipart/form-data">
+    <form class="rf-form" name="painter-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html" enctype="multipart/form-data">
       <input type="hidden" name="form-name" value="painter-application">
-      <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
+      <p class="hidden-field" aria-hidden="true">
+        <label>Do not fill this out if you are human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+      </p>
       <div class="form-row">
         <input type="text" name="full-name" placeholder="Full Name" required>
         <input type="tel" name="phone" placeholder="Phone Number" required>
       </div>
       <div class="form-row">
         <input type="email" name="email" placeholder="Email Address" required>
-        <select name="experience">
+        <select name="experience" required>
           <option value="" disabled selected>Years of Experience</option>
           <option>Less than 1 year</option>
           <option>1–3 years</option>
@@ -1876,9 +1882,8 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
           <option>10+ years</option>
         </select>
       </div>
-      <textarea name="message" placeholder="Tell us about your painting or finishing experience"></textarea>
-      <label class="resume-label" style="font-size:0.82rem;color:var(--slate);font-weight:600;letter-spacing:.5px;text-transform:uppercase;">Resume / Portfolio (optional)</label>
-      <input type="file" name="resume" accept=".pdf,.doc,.docx,.jpg,.png" style="font-size:0.88rem; color:var(--slate); border:1px solid rgba(74,85,104,0.18); padding:10px 12px; border-radius:4px; background:white; width:100%;">
+      <textarea name="message" placeholder="Tell us about your painting or finishing experience" required></textarea>
+      <input type="file" name="resume" accept=".pdf,.doc,.docx,.jpg,.png" aria-label="Upload resume or work photos" style="font-size:0.88rem; color:var(--slate);">
       <button type="submit" class="form-submit">Apply Now</button>
     </form>
   </div>
@@ -1953,25 +1958,128 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
 
 
 <script>
-  // Modern Before & After sliders
-  document.querySelectorAll('[data-slider]').forEach((slider) => {
+document.addEventListener('DOMContentLoaded', function () {
+  // Before & After sliders — reliable drag on mouse, touch, and pen
+  document.querySelectorAll('[data-slider]').forEach(function (slider) {
     const beforeWrap = slider.querySelector('.ba-before-wrap');
     const line = slider.querySelector('.ba-line');
     const handle = slider.querySelector('.ba-handle');
+
+    if (!beforeWrap || !line || !handle) return;
+
     let currentPct = 50;
+    let isDragging = false;
+    let activePointerId = null;
+
+    // Accessibility: expose the handle as a slider control
+    handle.setAttribute('tabindex', '0');
+    handle.setAttribute('role', 'slider');
+    handle.setAttribute('aria-valuemin', '4');
+    handle.setAttribute('aria-valuemax', '96');
+    handle.setAttribute('aria-valuenow', String(currentPct));
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
 
     function setPosition(pct) {
-      currentPct = Math.max(4, Math.min(96, pct));
+      currentPct = clamp(pct, 4, 96);
       beforeWrap.style.clipPath = 'inset(0 ' + (100 - currentPct) + '% 0 0)';
       line.style.left = currentPct + '%';
       handle.style.left = currentPct + '%';
+      handle.setAttribute('aria-valuenow', String(Math.round(currentPct)));
     }
 
-    function positionFromEvent(clientX) {
+    function positionFromClientX(clientX) {
       const rect = slider.getBoundingClientRect();
+      if (!rect.width) return;
       setPosition(((clientX - rect.left) / rect.width) * 100);
     }
 
-    slider.addEventListener('pointerdown', (event) => {
-      slider.setPointerCapture(event.pointerId);
-  
+    function startDrag(event) {
+      // Only respond to the primary button for mouse input
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+      isDragging = true;
+      activePointerId = event.pointerId;
+      positionFromClientX(event.clientX);
+
+      try {
+        slider.setPointerCapture(event.pointerId);
+      } catch (error) { /* pointer capture unsupported - drag still works */ }
+
+      event.preventDefault();
+    }
+
+    function moveDrag(event) {
+      if (!isDragging) return;
+      if (activePointerId !== null && event.pointerId !== activePointerId) return;
+
+      positionFromClientX(event.clientX);
+      event.preventDefault();
+    }
+
+    function stopDrag(event) {
+      if (!isDragging) return;
+      if (event && activePointerId !== null && event.pointerId !== undefined && event.pointerId !== activePointerId) return;
+
+      isDragging = false;
+
+      try {
+        if (activePointerId !== null && slider.hasPointerCapture && slider.hasPointerCapture(activePointerId)) {
+          slider.releasePointerCapture(activePointerId);
+        }
+      } catch (error) { /* already released */ }
+
+      activePointerId = null;
+    }
+
+    slider.addEventListener('pointerdown', startDrag);
+    slider.addEventListener('pointermove', moveDrag);
+    slider.addEventListener('pointerup', stopDrag);
+    slider.addEventListener('pointercancel', stopDrag);
+    slider.addEventListener('lostpointercapture', stopDrag);
+
+    // Touch fallback for older browsers without Pointer Events
+    if (!window.PointerEvent) {
+      slider.addEventListener('touchstart', function (event) {
+        isDragging = true;
+        positionFromClientX(event.touches[0].clientX);
+        event.preventDefault();
+      }, { passive: false });
+      slider.addEventListener('touchmove', function (event) {
+        if (!isDragging) return;
+        positionFromClientX(event.touches[0].clientX);
+        event.preventDefault();
+      }, { passive: false });
+      slider.addEventListener('touchend', function () { isDragging = false; });
+      slider.addEventListener('touchcancel', function () { isDragging = false; });
+    }
+
+    // Keyboard support on the handle
+    handle.addEventListener('keydown', function (event) {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        setPosition(currentPct - 5);
+      }
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        setPosition(currentPct + 5);
+      }
+      if (event.key === 'Home') {
+        event.preventDefault();
+        setPosition(4);
+      }
+      if (event.key === 'End') {
+        event.preventDefault();
+        setPosition(96);
+      }
+    });
+
+    setPosition(50);
+  });
+});
+</script>
+
+</body>
+</html>
