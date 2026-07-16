@@ -38,6 +38,18 @@ fake review schema violates Google's guidelines and risks a manual action.
 search engines to see, they should be re-added only once real, sourced, and
 ideally visibly matching what's shown on the page.
 
+### 3. "Licensed & Insured" claim — found after initial audit, now confirmed
+I missed this in the first pass (buried in the 600KB file): the homepage
+marquee says "Licensed & Insured," and a dedicated FAQ ("Are you licensed and
+insured in New York?") states the business is "fully insured" with "general
+liability coverage." My original checklist incorrectly said the site made no
+insurance/license claims — that was wrong, and I should have caught it
+immediately given how much legal weight that claim carries.
+
+✅ **Confirmed 2026-07-15 by owner: this is true and verifiable.** No changes
+made — claim stays live. Flagging here only so there's a record that it was
+specifically confirmed, not just left unchecked.
+
 ---
 
 ## 🟡 High priority — structured data currently removed, needs real data
@@ -82,7 +94,10 @@ verified:
   Confirm every city listed is actually served today — thin/inaccurate
   service-area claims can hurt local SEO credibility.
 - **Phone number:** (347) 335-1078 — ✅ **confirmed correct by owner (2026-07-15).**
-- **Email:** info@residentialfinishes.com — still needs confirmation (see open question below).
+- **Email:** ✅ **Confirmed 2026-07-15:** `residential.finishez@gmail.com` is
+  the correct lead inbox (matches what's shown on the quote form). The schema
+  previously said `info@residentialfinishes.com` — a different, unconfirmed
+  address that could have silently misdirected leads. Fixed to match.
 - **Business name:** "Residential Finishes LLC" (alternate name used in schema:
   "Residential Finishes Interior Painting LLC") — confirm exact legal/display
   name to use consistently.
@@ -103,11 +118,12 @@ verified:
 
 ## ⚪ Not currently claimed — confirm if you want to add any
 
-The site does **not** currently claim any of the following. Do not add them
-unless you can prove them:
+The site does **not** currently claim any of the following (insurance is
+claimed — see item 3 above, confirmed). Do not add the rest unless you can
+prove them:
 
-- Licenses, certifications, or trade credentials
-- Insurance or bonding
+- Licenses or trade certifications specifically (insurance is separately confirmed above)
+- Bonding
 - Awards or industry affiliations
 - Warranties or guarantees
 

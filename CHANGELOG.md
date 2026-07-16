@@ -48,6 +48,11 @@ still pending owner confirmation.
 ### Correction — reconciled with GitHub repo state
 While preparing to push, discovered the actual GitHub repo (`fredthepreacher/residentialfinishes`) already contained better-designed, on-brand `thank-you-quote.html` and `thank-you-employment.html` pages (matching the site's full header/hero/steps/timeline/CTA/footer system) that were not present in this local working folder. Replaced the simpler placeholder thank-you pages built earlier in this session with the repo's existing designs, adding the GA4 tracking script and `generate_lead` event on top. Also removed unverified response-time claims ("within 1 business day" / "within a few business days") from both pages, replacing with neutral language, consistent with the rest of this cleanup.
 
+### Post-deploy fixes (caught by reviewing the live push)
+- Found and fixed a leftover "Free estimates · 7 days a week" claim in the final CTA section that contradicted the hours just confirmed — removed.
+- Found a "Licensed & Insured" claim (homepage marquee + a dedicated FAQ) that was missed in the original audit. Owner confirmed 2026-07-15 this is true — left live, now formally logged as confirmed rather than unchecked.
+- Found the quote form told visitors their request goes to `residential.finishez@gmail.com`, while the schema `email` field said `info@residentialfinishes.com` — two different addresses. Owner confirmed `residential.finishez@gmail.com` is correct; fixed the schema to match.
+
 ### Not done in this pass (flagged for later phases)
 - New page architecture (`/services/`, `/request-a-quote/`, `/faq/`, etc.) — P1.
 - Responsive `srcset`/`sizes`, `<picture>`, width/height audit across all remaining images — P1.
