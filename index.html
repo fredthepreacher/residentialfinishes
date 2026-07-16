@@ -332,6 +332,14 @@
         "@type": "Answer",
         "text": "A collapsed section or hole is rebuilt from the framing out: damaged material is removed, new drywall is fitted and taped, then finished and painted to blend with the surrounding ceiling. The underlying leak or moisture source should be resolved before final repairs, and any structural or mold concerns should be evaluated by the appropriate specialist first."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Will the repaired ceiling match the surrounding texture?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Residential Finishes LLC texture-matches repaired sections to blend with the surrounding ceiling as closely as possible. On heavily textured or older popcorn ceilings, a perfect match isn't always achievable, which is why full popcorn removal and a smooth refinish is often the more reliable option for an even, uniform look."
+      }
     }
   ]
 }
@@ -1015,12 +1023,15 @@
 .modern-section-head .section-label { justify-content: center; color: var(--gold); }
 .modern-section-head .section-label::before { display: none; }
 .modern-section-head p { color: var(--slate); font-size: 1rem; line-height: 1.75; }
-.ba-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; max-width: 1180px; margin: 0 auto; }
-.ba-card { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 22px 60px rgba(26,35,50,0.12); border: 1px solid rgba(201,168,76,0.18); }
+.ba-grid { --ba-gap: clamp(24px, 3vw, 40px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ba-gap); align-items: stretch; max-width: 1180px; margin: 0 auto; }
+.ba-card { display: flex; flex-direction: column; height: 100%; background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 22px 60px rgba(26,35,50,0.12); border: 1px solid rgba(201,168,76,0.18); }
 .ba-card:first-child { grid-column: 1 / -1; }
-.ba-slider { position: relative; height: clamp(360px, 52vw, 680px); overflow: hidden; cursor: ew-resize; background: var(--deep-navy); touch-action: none; user-select: none; -webkit-user-select: none; }
-.ba-card:not(:first-child) .ba-slider { height: clamp(300px, 38vw, 480px); }
-.ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
+/* Center a lone trailing card instead of stretching it awkwardly: matches when this
+   is both the last .ba-card and an even position among cards (i.e. the non-hero
+   card count is odd, so the last one has no partner in the 2-column row) */
+.ba-card:nth-last-of-type(1):nth-of-type(even) { grid-column: 1 / -1; width: min(100%, calc((100% - var(--ba-gap)) / 2)); justify-self: center; }
+.ba-slider { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; cursor: ew-resize; background: var(--deep-navy); touch-action: none; user-select: none; -webkit-user-select: none; }
+.ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--ba-x, 50%) var(--ba-y, 50%); display: block; pointer-events: none; -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
 .ba-before-wrap { position: absolute; inset: 0; clip-path: inset(0 50% 0 0); z-index: 2; }
 .ba-before-wrap .ba-img { width: 100%; height: 100%; }
 .ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: rgba(255,255,255,0.92); z-index: 4; transform: translateX(-50%); box-shadow: 0 0 18px rgba(0,0,0,0.35); pointer-events: none; }
@@ -1028,7 +1039,7 @@
 .ba-label { position: absolute; bottom: 18px; z-index: 6; padding: 8px 14px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; pointer-events: none; }
 .ba-label-before { left: 18px; background: rgba(28,28,30,0.82); color: var(--cream); }
 .ba-label-after { right: 18px; background: rgba(201,168,76,0.95); color: var(--charcoal); }
-.ba-card-copy { padding: 22px 24px 26px; }
+.ba-card-copy { display: flex; flex-direction: column; flex: 1; padding: clamp(18px, 2vw, 26px) 24px 26px; min-height: 118px; }
 .ba-card-copy h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; margin-bottom: 8px; color: var(--charcoal); }
 .ba-card-copy p { color: var(--slate); line-height: 1.65; font-size: 0.95rem; }
 .section-logo-img { max-height: 80px; width: auto; display: inline-block; vertical-align: middle; filter: none; }
@@ -1054,13 +1065,15 @@
   .modern-before-after, .form-section { padding: 72px 28px; }
   .ba-grid, .form-section { grid-template-columns: 1fr; }
   .ba-card:first-child { grid-column: auto; }
+  /* Single-column layout: every card is already full width, so undo the
+     desktop-only centered-half-width treatment for a lone trailing card */
+  .ba-card:nth-last-of-type(1):nth-of-type(even) { grid-column: auto; width: 100%; justify-self: stretch; }
   .form-panel { padding: 32px 24px; }
 }
 @media (max-width: 640px) {
   .modern-before-after, .form-section { padding: 58px 20px; }
   .modern-section-head { margin-bottom: 34px; }
   .ba-grid { gap: 20px; }
-  .ba-slider, .ba-card:not(:first-child) .ba-slider { height: 430px; }
   .ba-handle { width: 44px; height: 44px; font-size: 1.1rem; }
   .ba-card-copy { padding: 18px 18px 22px; }
   .form-row, .team-list { grid-template-columns: 1fr; }
@@ -1399,27 +1412,29 @@
 }
 
 
-/* FINAL ZOOM-OUT FIX FOR PROJECT 5 BEFORE/AFTER */
-/* nth-last-of-type (not nth-last-child) so this keeps targeting the last two
-   .ba-card articles even if non-card elements (notes, CTAs) are added as siblings */
-.premium-ba-grid .ba-card:nth-last-of-type(-n+2) .ba-slider {
-  background: #efe7db;
-}
+/* NOTE: the old "zoom-out fix" here forced object-fit:contain on the last two
+   .ba-card elements by grid position. That was a per-position patch: it happened
+   to land on project-5 (which genuinely needs its own two-image composite
+   treatment, already handled below by the dedicated .ba-card-repair rules) AND
+   project-4 (a normal single before/after pair with no such need). Removed in
+   favor of the shared aspect-ratio + object-fit:cover frame every card now uses,
+   plus the .ba-card-repair-scoped rules for the one card that is structurally
+   different. */
 
-.premium-ba-grid .ba-card:nth-last-of-type(-n+2) .ba-img {
-  object-fit: contain !important;
-  background: #efe7db;
-  padding: 10px;
+/* Staggered reveal-on-scroll, consistent direction for every card (not random
+   left/right entries), respecting prefers-reduced-motion. JS only adds
+   .ba-reveal-ready if it actually runs, so cards stay visible with JS disabled. */
+.ba-card.ba-reveal-ready {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms ease, transform 600ms ease;
 }
-
-.premium-ba-grid .ba-card:nth-last-of-type(-n+2) .ba-before-wrap {
-  background: #efe7db;
+.ba-card.ba-reveal-ready.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
-
-@media (max-width: 640px) {
-  .premium-ba-grid .ba-card:nth-last-of-type(-n+2) .ba-img {
-    padding: 6px;
-  }
+@media (prefers-reduced-motion: reduce) {
+  .ba-card.ba-reveal-ready { opacity: 1; transform: none; transition: none; }
 }
 
 /* Ceiling-repair comparison additions: reusable logo watermark, illustrative
@@ -1452,14 +1467,34 @@
   padding: 0 12px;
 }
 
-.ba-ceiling-cta {
-  grid-column: 1 / -1;
+.ba-ceiling-explainer {
+  max-width: 760px;
+  margin: 52px auto 0;
+  padding: 0 20px;
   text-align: center;
-  margin: 10px 0 4px;
-  font-size: 0.95rem;
-  color: var(--slate);
 }
-.ba-ceiling-cta a { color: var(--gold); font-weight: 700; text-decoration: underline; }
+.ba-ceiling-explainer h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+}
+.ba-ceiling-explainer p {
+  color: var(--slate);
+  line-height: 1.75;
+  font-size: 0.95rem;
+}
+
+.ba-gallery-cta {
+  text-align: center;
+  margin: 30px auto 0;
+  padding: 0 20px;
+}
+.ba-gallery-cta p {
+  margin-top: 14px;
+  color: var(--slate);
+  font-size: 0.92rem;
+}
 
 @media (max-width: 640px) {
   .ba-logo-badge { width: clamp(40px, 14vw, 60px); right: 8px; bottom: 8px; padding: 4px; border-radius: 8px; }
@@ -1776,7 +1811,7 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
         </div>
       </article>
 
-      <div class="ba-illustrative-note">Illustrative ceiling-repair examples. Final results vary by property and damage conditions.</div>
+      <div class="ba-illustrative-note">Illustrative service-transformation examples, not verified customer photos. Final results vary by property and damage conditions.</div>
 
       <article class="ba-card">
         <div class="ba-slider" data-slider>
@@ -1823,8 +1858,6 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
         </div>
       </article>
 
-      <p class="ba-ceiling-cta">Have ceiling stains, cracks, peeling paint, or a damaged opening? <a href="#quote">Request a ceiling-repair estimate.</a></p>
-
       <article class="ba-card">
         <div class="ba-slider" data-slider>
           <img class="ba-img ba-after" src="assets/project-3-after.webp" alt="After: Window wall drywall repair and painting — interior finishing in Westchester NY" loading="lazy">
@@ -1837,21 +1870,6 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
         <div class="ba-card-copy">
           <h3>Window Wall Repair</h3>
           <p>Surface patching and color blending for a smooth, finished wall.</p>
-        </div>
-      </article>
-
-      <article class="ba-card">
-        <div class="ba-slider" data-slider>
-          <img class="ba-img ba-after" src="assets/project-4-after.webp" alt="After - Bedroom Transformation" loading="lazy">
-          <div class="ba-before-wrap"><img class="ba-img ba-before" src="assets/project-4-before.webp" alt="Before - Bedroom Transformation" loading="lazy"></div>
-          <div class="ba-label ba-label-before">Before</div>
-          <div class="ba-label ba-label-after">After</div>
-          <div class="ba-line"></div>
-          <button class="ba-handle" type="button" role="slider" tabindex="0" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" aria-label="Drag to compare before and after">↔</button>
-        </div>
-        <div class="ba-card-copy">
-          <h3>Bedroom Transformation</h3>
-          <p>Wallpaper removal and a clean modern paint finish.</p>
         </div>
       </article>
 
@@ -1873,6 +1891,31 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
         </div>
       </article>
 
+      <article class="ba-card">
+        <div class="ba-slider" data-slider>
+          <img class="ba-img ba-after" src="assets/project-4-after.webp" alt="After - Bedroom Transformation" loading="lazy">
+          <div class="ba-before-wrap"><img class="ba-img ba-before" src="assets/project-4-before.webp" alt="Before - Bedroom Transformation" loading="lazy"></div>
+          <div class="ba-label ba-label-before">Before</div>
+          <div class="ba-label ba-label-after">After</div>
+          <div class="ba-line"></div>
+          <button class="ba-handle" type="button" role="slider" tabindex="0" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" aria-label="Drag to compare before and after">↔</button>
+        </div>
+        <div class="ba-card-copy">
+          <h3>Bedroom Transformation</h3>
+          <p>Wallpaper removal and a clean modern paint finish.</p>
+        </div>
+      </article>
+
+  </div>
+
+  <div class="ba-ceiling-explainer">
+    <h3>Ceiling Water Damage and Texture Repair</h3>
+    <p>A water stain usually means moisture found its way in — that source needs to be found and corrected before any cosmetic repair is done. Depending on the damage, drywall may need cutting, patching, taping, skim coating, priming, texture matching, and painting. Popcorn ceilings can often be removed and refinished with a smooth modern surface instead. The exact scope depends on the moisture damage, ceiling condition, room size, texture, and access — every home is different, so we start with an inspection and a written estimate.</p>
+  </div>
+
+  <div class="ba-gallery-cta">
+    <a href="#quote" class="btn-primary">Request a Free Estimate</a>
+    <p>Have ceiling stains, cracks, peeling paint, or a damaged opening? We can take a look.</p>
   </div>
 </section>
 
@@ -2015,6 +2058,10 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
         <div class="faq-q">What happens when part of a ceiling has collapsed or there's a hole?</div>
         <p class="faq-a">A collapsed section or hole is rebuilt from the framing out — damaged material is removed, new drywall is fitted and taped, then finished and painted to blend with the surrounding ceiling. As with any water-related damage, the underlying leak or moisture source should be resolved before final repairs, and any structural or mold concerns should be evaluated by the appropriate specialist first.</p>
       </div>
+      <div class="faq-item">
+        <div class="faq-q">Will the repaired ceiling match the surrounding texture?</div>
+        <p class="faq-a">We texture-match repaired sections to blend with the surrounding ceiling as closely as possible. On heavily textured or older popcorn ceilings, a perfect match isn't always achievable, which is why full popcorn removal and a smooth refinish is often the more reliable option for an even, uniform look.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -2141,6 +2188,7 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
       <div class="footer-heading">Contact</div>
       <ul class="footer-links">
         <li><a href="tel:3473351078">(347) 335-1078</a></li>
+        <li><a href="mailto:residential.finishez@gmail.com">Email Us</a></li>
         <li><a href="#quote">Get a Quote</a></li>
         <li><a href="#story">About</a></li>
         <li><a href="https://share.google/utH4UPmZkVdlgDomP" target="_blank" rel="noopener">View on Google</a></li>
@@ -2169,6 +2217,33 @@ document.addEventListener('DOMContentLoaded', function () {
     badge.appendChild(img);
     slider.appendChild(badge);
   });
+
+  // Staggered reveal-on-scroll for every before/after card — one consistent
+  // direction (fade + rise), gently staggered, never random left/right entries.
+  // The .ba-reveal-ready class is only added here, so cards stay fully visible
+  // if JavaScript fails to load or run.
+  (function () {
+    const cards = Array.prototype.slice.call(document.querySelectorAll('.ba-card'));
+    if (!cards.length) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) return;
+
+    cards.forEach(function (card) { card.classList.add('ba-reveal-ready'); });
+
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        const card = entry.target;
+        const index = cards.indexOf(card);
+        const delay = Math.min(index % 2, 1) * 90;
+        setTimeout(function () { card.classList.add('is-visible'); }, delay);
+        revealObserver.unobserve(card);
+      });
+    }, { threshold: 0.15 });
+
+    cards.forEach(function (card) { revealObserver.observe(card); });
+  })();
 
   // Before & After sliders — reliable drag on mouse, touch, and pen
   document.querySelectorAll('[data-slider]').forEach(function (slider) {
