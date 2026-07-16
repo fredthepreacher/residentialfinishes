@@ -238,6 +238,22 @@
         "@type": "Answer",
         "text": "Yes. Residential Finishes LLC is fully insured. We carry general liability coverage for all work performed across New York City, Westchester County, and Long Island. Your home and property are protected on every job."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a water-damaged ceiling be repaired?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In most cases, yes. Stained, cracked, or bubbling drywall can be cut out, patched, sealed, and repainted to a smooth, uniform finish. The moisture source causing the damage needs to be identified and fixed first, since cosmetic ceiling repair alone will not stop a leak from returning. Residential Finishes LLC offers a free assessment across NYC, Westchester County, and Long Island."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when part of a ceiling has collapsed or there's a hole?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A collapsed section or hole is rebuilt from the framing out: damaged material is removed, new drywall is fitted and taped, then finished and painted to blend with the surrounding ceiling. The underlying leak or moisture source should be resolved before final repairs, and any structural or mold concerns should be evaluated by the appropriate specialist first."
+      }
     }
   ]
 }
@@ -1306,24 +1322,70 @@
 
 
 /* FINAL ZOOM-OUT FIX FOR PROJECT 5 BEFORE/AFTER */
-.premium-ba-grid .ba-card:nth-last-child(-n+2) .ba-slider {
+/* nth-last-of-type (not nth-last-child) so this keeps targeting the last two
+   .ba-card articles even if non-card elements (notes, CTAs) are added as siblings */
+.premium-ba-grid .ba-card:nth-last-of-type(-n+2) .ba-slider {
   background: #efe7db;
 }
 
-.premium-ba-grid .ba-card:nth-last-child(-n+2) .ba-img {
+.premium-ba-grid .ba-card:nth-last-of-type(-n+2) .ba-img {
   object-fit: contain !important;
   background: #efe7db;
   padding: 10px;
 }
 
-.premium-ba-grid .ba-card:nth-last-child(-n+2) .ba-before-wrap {
+.premium-ba-grid .ba-card:nth-last-of-type(-n+2) .ba-before-wrap {
   background: #efe7db;
 }
 
 @media (max-width: 640px) {
-  .premium-ba-grid .ba-card:nth-last-child(-n+2) .ba-img {
+  .premium-ba-grid .ba-card:nth-last-of-type(-n+2) .ba-img {
     padding: 6px;
   }
+}
+
+/* Ceiling-repair comparison additions: reusable logo watermark, illustrative
+   disclosure, and supporting CTA for the new before/after pairs */
+.ba-logo-badge {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 8;
+  width: clamp(56px, 8vw, 88px);
+  aspect-ratio: 1;
+  background: rgba(250,247,242,0.9);
+  border-radius: 10px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+}
+.ba-logo-badge img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+.ba-illustrative-note {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 0.78rem;
+  font-style: italic;
+  color: rgba(28,28,30,0.55);
+  margin: -6px 0 6px;
+  padding: 0 12px;
+}
+
+.ba-ceiling-cta {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 10px 0 4px;
+  font-size: 0.95rem;
+  color: var(--slate);
+}
+.ba-ceiling-cta a { color: var(--gold); font-weight: 700; text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .ba-logo-badge { width: clamp(40px, 14vw, 60px); right: 8px; bottom: 8px; padding: 4px; border-radius: 8px; }
+  .ba-illustrative-note { font-size: 0.72rem; }
 }
 
 
@@ -1635,6 +1697,55 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
         </div>
       </article>
 
+      <div class="ba-illustrative-note">Illustrative ceiling-repair examples. Final results vary by property and damage conditions.</div>
+
+      <article class="ba-card">
+        <div class="ba-slider" data-slider>
+          <img class="ba-img ba-after" src="assets/ceiling-popcorn-smooth-finish-after.webp" alt="Living room ceiling after water-damage repair and smooth white refinishing" loading="lazy">
+          <div class="ba-before-wrap"><img class="ba-img ba-before" src="assets/ceiling-popcorn-water-damage-before.webp" alt="Water-stained popcorn ceiling before professional repair and texture removal" loading="lazy"></div>
+          <div class="ba-label ba-label-before">Before</div>
+          <div class="ba-label ba-label-after">After</div>
+          <div class="ba-line"></div>
+          <button class="ba-handle" type="button" role="slider" tabindex="0" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" aria-label="Drag to compare popcorn ceiling water-damage restoration, before and after">↔</button>
+        </div>
+        <div class="ba-card-copy">
+          <h3>Popcorn Ceiling Water-Damage Restoration</h3>
+          <p>Water-damaged popcorn texture was removed, repaired, and refinished with a clean, smooth ceiling for a brighter modern look.</p>
+        </div>
+      </article>
+
+      <article class="ba-card">
+        <div class="ba-slider" data-slider>
+          <img class="ba-img ba-after" src="assets/bedroom-ceiling-restoration-after.webp" alt="Bedroom ceiling after water-damage restoration and fresh white paint" loading="lazy">
+          <div class="ba-before-wrap"><img class="ba-img ba-before" src="assets/bedroom-ceiling-water-damage-before.webp" alt="Bedroom ceiling with water stains, cracking, and peeling drywall before repair" loading="lazy"></div>
+          <div class="ba-label ba-label-before">Before</div>
+          <div class="ba-label ba-label-after">After</div>
+          <div class="ba-line"></div>
+          <button class="ba-handle" type="button" role="slider" tabindex="0" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" aria-label="Drag to compare bedroom ceiling water-damage repair, before and after">↔</button>
+        </div>
+        <div class="ba-card-copy">
+          <h3>Bedroom Ceiling Water-Damage Repair</h3>
+          <p>Stained and cracked ceiling drywall was restored, sealed, blended, and repainted for a smooth, uniform finish.</p>
+        </div>
+      </article>
+
+      <article class="ba-card">
+        <div class="ba-slider" data-slider>
+          <img class="ba-img ba-after" src="assets/ceiling-hole-drywall-repair-after.webp" alt="Ceiling after hole repair, drywall finishing, and smooth white repainting" loading="lazy">
+          <div class="ba-before-wrap"><img class="ba-img ba-before" src="assets/ceiling-hole-water-damage-before.webp" alt="Large water-damaged ceiling hole exposing framing before drywall restoration" loading="lazy"></div>
+          <div class="ba-label ba-label-before">Before</div>
+          <div class="ba-label ba-label-after">After</div>
+          <div class="ba-line"></div>
+          <button class="ba-handle" type="button" role="slider" tabindex="0" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" aria-label="Drag to compare ceiling hole and drywall restoration, before and after">↔</button>
+        </div>
+        <div class="ba-card-copy">
+          <h3>Ceiling Hole and Drywall Restoration</h3>
+          <p>The damaged ceiling opening was rebuilt, patched, finished, and painted to restore a seamless surface.</p>
+        </div>
+      </article>
+
+      <p class="ba-ceiling-cta">Have ceiling stains, cracks, peeling paint, or a damaged opening? <a href="#quote">Request a ceiling-repair estimate.</a></p>
+
       <article class="ba-card">
         <div class="ba-slider" data-slider>
           <img class="ba-img ba-after" src="assets/project-3-after.webp" alt="After: Window wall drywall repair and painting — interior finishing in Westchester NY" loading="lazy">
@@ -1814,6 +1925,14 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
         <div class="faq-q">Are you licensed and insured in New York?</div>
         <p class="faq-a">Yes. Residential Finishes LLC is fully insured and carries general liability coverage for all work performed across New York City, Westchester County, and Long Island. Your home and property are protected on every job.</p>
       </div>
+      <div class="faq-item">
+        <div class="faq-q">Can a water-damaged ceiling be repaired?</div>
+        <p class="faq-a">In most cases, yes. Stained, cracked, or bubbling drywall can be cut out, patched, sealed, and repainted to a smooth, uniform finish. The moisture source causing the damage needs to be identified and fixed first — cosmetic ceiling repair alone won't stop a leak from returning. <a href="#quote">Contact us</a> for a free assessment.</p>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens when part of a ceiling has collapsed or there's a hole?</div>
+        <p class="faq-a">A collapsed section or hole is rebuilt from the framing out — damaged material is removed, new drywall is fitted and taped, then finished and painted to blend with the surrounding ceiling. As with any water-related damage, the underlying leak or moisture source should be resolved before final repairs, and any structural or mold concerns should be evaluated by the appropriate specialist first.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1959,6 +2078,20 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+  // Reusable brand watermark on every before/after slider (existing + new)
+  document.querySelectorAll('.ba-slider').forEach(function (slider) {
+    const badge = document.createElement('div');
+    badge.className = 'ba-logo-badge';
+    badge.setAttribute('aria-hidden', 'true');
+    const img = document.createElement('img');
+    img.src = 'assets/rf-logo.png';
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    badge.appendChild(img);
+    slider.appendChild(badge);
+  });
+
   // Before & After sliders — reliable drag on mouse, touch, and pen
   document.querySelectorAll('[data-slider]').forEach(function (slider) {
     const beforeWrap = slider.querySelector('.ba-before-wrap');
@@ -2077,6 +2210,51 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     setPosition(50);
+
+    // One-time subtle preview animation after the slider first enters the
+    // viewport: nudges the handle, then returns to center. Runs once per
+    // slider per page load, cancels immediately on interaction, and is
+    // skipped entirely for prefers-reduced-motion.
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+      let previewDone = false;
+      let previewCancelled = false;
+
+      function cancelPreview() { previewCancelled = true; }
+      ['pointerdown', 'touchstart', 'keydown'].forEach(function (evt) {
+        slider.addEventListener(evt, cancelPreview, { passive: true });
+      });
+
+      function animateTo(target, duration, onDone) {
+        const start = currentPct;
+        const t0 = performance.now();
+        function step(now) {
+          if (previewCancelled) return;
+          const t = Math.min((now - t0) / duration, 1);
+          const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+          setPosition(start + (target - start) * eased);
+          if (t < 1) {
+            requestAnimationFrame(step);
+          } else if (onDone) {
+            onDone();
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      const previewObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !previewDone && !previewCancelled) {
+            previewDone = true;
+            previewObserver.disconnect();
+            animateTo(62, 550, function () {
+              if (!previewCancelled) animateTo(50, 550);
+            });
+          }
+        });
+      }, { threshold: 0.4 });
+      previewObserver.observe(slider);
+    }
   });
 });
 </script>
