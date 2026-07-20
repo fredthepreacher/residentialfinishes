@@ -1023,22 +1023,49 @@
 .modern-section-head .section-label { justify-content: center; color: var(--gold); }
 .modern-section-head .section-label::before { display: none; }
 .modern-section-head p { color: var(--slate); font-size: 1rem; line-height: 1.75; }
-.ba-grid { --ba-gap: clamp(24px, 3vw, 40px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ba-gap); align-items: stretch; max-width: 1180px; margin: 0 auto; }
+/* Comparison gallery grid: every card is a uniform grid cell, no featured/hero
+   card and no per-card offsets. Mobile-first: 1 column by default, 2 columns
+   (on a 4-track/span-2 grid) at 768px+, 3 columns (6-track/span-2) at 1280px+.
+   The 4- and 6-track internal structure exists so a leftover partial row can be
+   centered by shifting its start column, instead of stretching or left-hugging
+   it — see the .ba-center-* classes and the JS that assigns them. */
+.ba-grid {
+  --ba-gap: clamp(24px, 2.5vw, 36px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ba-gap);
+  align-items: stretch;
+  width: min(100%, 1180px);
+  margin-inline: auto;
+}
+@media (min-width: 768px) {
+  .ba-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ba-card { grid-column: span 2; }
+  /* One leftover card in a 2-per-row layout: center it at the same width as a
+     normal card (columns 2–3), instead of stretching it full width. */
+  .ba-card.ba-center-1 { grid-column: 2 / span 2; }
+}
+@media (min-width: 1280px) {
+  .ba-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .ba-card.ba-center-1 { grid-column: 3 / span 2; }
+  /* Two leftover cards in a 3-per-row layout: center the pair as a unit,
+     each still at normal card width, with equal empty space on both sides. */
+  .ba-card.ba-center-2a { grid-column: 2 / span 2; }
+  .ba-card.ba-center-2b { grid-column: 4 / span 2; }
+}
 .ba-card { display: flex; flex-direction: column; height: 100%; background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 22px 60px rgba(26,35,50,0.12); border: 1px solid rgba(201,168,76,0.18); }
-.ba-card:first-child { grid-column: 1 / -1; }
-/* Center a lone trailing card instead of stretching it awkwardly: matches when this
-   is both the last .ba-card and an even position among cards (i.e. the non-hero
-   card count is odd, so the last one has no partner in the 2-column row) */
-.ba-card:nth-last-of-type(1):nth-of-type(even) { grid-column: 1 / -1; width: min(100%, calc((100% - var(--ba-gap)) / 2)); justify-self: center; }
 .ba-slider { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; cursor: ew-resize; background: var(--deep-navy); touch-action: none; user-select: none; -webkit-user-select: none; }
 .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--ba-x, 50%) var(--ba-y, 50%); display: block; pointer-events: none; -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
 .ba-before-wrap { position: absolute; inset: 0; clip-path: inset(0 50% 0 0); z-index: 2; }
 .ba-before-wrap .ba-img { width: 100%; height: 100%; }
 .ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 3px; background: rgba(255,255,255,0.92); z-index: 4; transform: translateX(-50%); box-shadow: 0 0 18px rgba(0,0,0,0.35); pointer-events: none; }
 .ba-handle { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 20; touch-action: none; pointer-events: auto; width: 54px; height: 54px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.9); background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); color: white; font-size: 1.4rem; cursor: ew-resize; box-shadow: 0 10px 30px rgba(0,0,0,0.28); }
-.ba-label { position: absolute; bottom: 18px; z-index: 6; padding: 8px 14px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; pointer-events: none; }
-.ba-label-before { left: 18px; background: rgba(28,28,30,0.82); color: var(--cream); }
-.ba-label-after { right: 18px; background: rgba(201,168,76,0.95); color: var(--charcoal); }
+/* Labels sit at the TOP corners — never bottom, since the logo watermark
+   permanently occupies bottom-right on every card (see .ba-logo-badge). Putting
+   a label there too silently hid "After" behind the logo on every single card. */
+.ba-label { position: absolute; top: 14px; z-index: 6; padding: 8px 14px; border-radius: 999px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; pointer-events: none; }
+.ba-label-before { left: 14px; background: rgba(28,28,30,0.82); color: var(--cream); }
+.ba-label-after { right: 14px; background: rgba(201,168,76,0.95); color: var(--charcoal); }
 .ba-card-copy { display: flex; flex-direction: column; flex: 1; padding: clamp(18px, 2vw, 26px) 24px 26px; min-height: 118px; }
 .ba-card-copy h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; margin-bottom: 8px; color: var(--charcoal); }
 .ba-card-copy p { color: var(--slate); line-height: 1.65; font-size: 0.95rem; }
@@ -1063,17 +1090,12 @@
 .team-list li::before { content: '✓'; color: var(--gold); font-weight: 900; margin-right: 8px; }
 @media (max-width: 960px) {
   .modern-before-after, .form-section { padding: 72px 28px; }
-  .ba-grid, .form-section { grid-template-columns: 1fr; }
-  .ba-card:first-child { grid-column: auto; }
-  /* Single-column layout: every card is already full width, so undo the
-     desktop-only centered-half-width treatment for a lone trailing card */
-  .ba-card:nth-last-of-type(1):nth-of-type(even) { grid-column: auto; width: 100%; justify-self: stretch; }
+  .form-section { grid-template-columns: 1fr; }
   .form-panel { padding: 32px 24px; }
 }
 @media (max-width: 640px) {
   .modern-before-after, .form-section { padding: 58px 20px; }
   .modern-section-head { margin-bottom: 34px; }
-  .ba-grid { gap: 20px; }
   .ba-handle { width: 44px; height: 44px; font-size: 1.1rem; }
   .ba-card-copy { padding: 18px 18px 22px; }
   .form-row, .team-list { grid-template-columns: 1fr; }
@@ -2217,6 +2239,53 @@ document.addEventListener('DOMContentLoaded', function () {
     badge.appendChild(img);
     slider.appendChild(badge);
   });
+
+  // Center a leftover partial row instead of stretching or left-hugging it.
+  // The gallery is 1 column below 768px, 2 columns 768–1279px (on an internal
+  // 4-track grid, each card spanning 2), and 3 columns at 1280px+ (6-track,
+  // span 2) — see the .ba-grid media queries. This recomputes the actual
+  // column count and leftover-card count on load and on resize, so it keeps
+  // working correctly if cards are added or removed later.
+  (function () {
+    const gallery = document.querySelector('.ba-grid');
+    if (!gallery) return;
+    const cards = Array.prototype.slice.call(gallery.querySelectorAll(':scope > .ba-card'));
+    if (!cards.length) return;
+
+    function currentColumns() {
+      const width = window.innerWidth;
+      if (width >= 1280) return 3;
+      if (width >= 768) return 2;
+      return 1;
+    }
+
+    function applyCentering() {
+      cards.forEach(function (card) {
+        card.classList.remove('ba-center-1', 'ba-center-2a', 'ba-center-2b');
+      });
+
+      const columns = currentColumns();
+      if (columns === 1) return;
+
+      const remainder = cards.length % columns;
+      if (remainder === 0) return;
+
+      if (remainder === 1) {
+        cards[cards.length - 1].classList.add('ba-center-1');
+      } else if (remainder === 2 && columns === 3) {
+        cards[cards.length - 2].classList.add('ba-center-2a');
+        cards[cards.length - 1].classList.add('ba-center-2b');
+      }
+    }
+
+    applyCentering();
+
+    let resizeTimer = null;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(applyCentering, 150);
+    });
+  })();
 
   // Staggered reveal-on-scroll for every before/after card — one consistent
   // direction (fade + rise), gently staggered, never random left/right entries.
