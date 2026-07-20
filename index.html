@@ -1435,13 +1435,8 @@
 
 
 /* NOTE: the old "zoom-out fix" here forced object-fit:contain on the last two
-   .ba-card elements by grid position. That was a per-position patch: it happened
-   to land on project-5 (which genuinely needs its own two-image composite
-   treatment, already handled below by the dedicated .ba-card-repair rules) AND
-   project-4 (a normal single before/after pair with no such need). Removed in
-   favor of the shared aspect-ratio + object-fit:cover frame every card now uses,
-   plus the .ba-card-repair-scoped rules for the one card that is structurally
-   different. */
+   .ba-card elements by grid position — a fragile per-position patch. Removed in
+   favor of the shared aspect-ratio + object-fit:cover frame every card now uses. */
 
 /* Staggered reveal-on-scroll, consistent direction for every card (not random
    left/right entries), respecting prefers-reduced-motion. JS only adds
@@ -1468,24 +1463,22 @@
   z-index: 8;
   width: clamp(56px, 8vw, 88px);
   aspect-ratio: 1;
-  background: rgba(250,247,242,0.9);
-  border-radius: 10px;
-  padding: 6px;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.45));
 }
 .ba-logo-badge img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
 .ba-illustrative-note {
-  grid-column: 1 / -1;
+  max-width: 1180px;
   text-align: center;
   font-size: 0.78rem;
   font-style: italic;
   color: rgba(28,28,30,0.55);
-  margin: -6px 0 6px;
+  margin: 4px auto 28px;
   padding: 0 12px;
 }
 
@@ -1519,12 +1512,9 @@
 }
 
 @media (max-width: 640px) {
-  .ba-logo-badge { width: clamp(40px, 14vw, 60px); right: 8px; bottom: 8px; padding: 4px; border-radius: 8px; }
+  .ba-logo-badge { width: clamp(40px, 14vw, 60px); right: 8px; bottom: 8px; }
   .ba-illustrative-note { font-size: 0.72rem; }
 }
-
-
-/* Composite before panel for merged project-5 card */
 
 
 /* ── ABOUT / STORY SECTION ── */
@@ -1619,31 +1609,6 @@
 @media (max-width: 600px) { #faq { padding: 72px 24px; } }
 
 
-/* ── Window Sill & Wall Repair card – two-image flex before panel ── */
-.ba-repair-before {
-  display: flex !important;
-  flex-direction: row;
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-.ba-repair-img {
-  flex: 1 1 50%;
-  min-width: 0;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  pointer-events: none;
-  -webkit-user-drag: none;
-  user-select: none;
-  -webkit-user-select: none;
-}
-/* After image for this card – cover fills, center-crop portrait */
-.ba-card-repair .ba-img.ba-after {
-  object-fit: cover;
-  object-position: center top;
-}
 </style>
 <!-- NETLIFY FORMS NOTE:
 After deployment, go to Netlify > Site configuration > Forms > Form notifications.
@@ -1801,6 +1766,8 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
     <p>Drag the gold handle to reveal the transformation.</p>
   </div>
 
+  <div class="ba-illustrative-note">Illustrative service-transformation examples, not verified customer photos. Final results vary by property and damage conditions.</div>
+
   <div class="ba-grid premium-ba-grid">
 
       <article class="ba-card">
@@ -1832,8 +1799,6 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
           <p>Ceiling repair and wall repaint brought the room back to a clean finish.</p>
         </div>
       </article>
-
-      <div class="ba-illustrative-note">Illustrative service-transformation examples, not verified customer photos. Final results vary by property and damage conditions.</div>
 
       <article class="ba-card">
         <div class="ba-slider" data-slider>
@@ -1892,24 +1857,6 @@ HTML alone cannot force Netlify email notifications; it captures submissions, an
         <div class="ba-card-copy">
           <h3>Window Wall Repair</h3>
           <p>Surface patching and color blending for a smooth, finished wall.</p>
-        </div>
-      </article>
-
-      <article class="ba-card ba-card-repair">
-        <div class="ba-slider" data-slider>
-          <img class="ba-img ba-after" src="assets/project-5-after-composite-clean.jpg" alt="After: Window sill and wall repair — interior painting and finishing in NYC and Long Island" loading="lazy">
-          <div class="ba-before-wrap ba-repair-before">
-            <img class="ba-repair-img" src="assets/project-5-before-wall-zoomed.jpg" alt="Before: Scuffed and damaged wall — professional wall repair and painting in New York" loading="lazy">
-            <img class="ba-repair-img" src="assets/project-5-before-window-zoomed.jpg" alt="Before - Chipped Window Sill" loading="lazy">
-          </div>
-          <div class="ba-label ba-label-before">Before</div>
-          <div class="ba-label ba-label-after">After</div>
-          <div class="ba-line"></div>
-          <button class="ba-handle" type="button" role="slider" tabindex="0" aria-valuemin="4" aria-valuemax="96" aria-valuenow="50" aria-label="Drag to compare before and after">↔</button>
-        </div>
-        <div class="ba-card-copy">
-          <h3>Window Sill &amp; Wall Repair</h3>
-          <p>Surface damage, chipped paint, and marked walls repaired and refinished for a clean, polished look.</p>
         </div>
       </article>
 
@@ -2232,7 +2179,7 @@ document.addEventListener('DOMContentLoaded', function () {
     badge.className = 'ba-logo-badge';
     badge.setAttribute('aria-hidden', 'true');
     const img = document.createElement('img');
-    img.src = 'assets/rf-logo.png';
+    img.src = 'assets/rf-logo-badge-icon.png';
     img.alt = '';
     img.loading = 'lazy';
     img.decoding = 'async';
