@@ -1353,6 +1353,15 @@
   display: none !important;
 }
 
+
+/* Anchor targets clear the fixed nav bar. Without this, every in-page link
+   (nav items and the "Request a Free Estimate" buttons) parks the section
+   heading underneath the fixed header. Values track the nav's own breakpoints. */
+html { scroll-padding-top: 124px; }
+@media (max-width: 1200px) { html { scroll-padding-top: 106px; } }
+@media (max-width: 960px)  { html { scroll-padding-top: 94px; } }
+@media (max-width: 640px)  { html { scroll-padding-top: 84px; } }
+
 .featured-photo-grid {
   max-width: 1180px;
   margin: 0 auto 70px;
@@ -2443,4 +2452,25 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     // email_click on every mailto: link
     document.querySelectorAll('a[href^="mailto:"]').forEach(function (a) {
-      a.ad                 
+      a.addEventListener('click', function () {
+        track('email_click', { link_url: a.getAttribute('href') });
+      });
+    });
+    // form_submit on the quote and employment forms
+    document.querySelectorAll('form[name]').forEach(function (f) {
+      f.addEventListener('submit', function () {
+        track('form_submit', { form_name: f.getAttribute('name') });
+      });
+    });
+    // cta_click on primary call-to-action buttons
+    document.querySelectorAll('.btn-primary').forEach(function (a) {
+      a.addEventListener('click', function () {
+        track('cta_click', { link_text: (a.textContent || '').trim().slice(0, 60) });
+      });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
